@@ -1,9 +1,13 @@
 // Тоглогчийн ээлжийг хадгалах, 1r toglogvh 0 , 2r toglogch 1 gj temdeglene
+var isNewGame;
 var activePlayer;
 var score;
 var roundscore;
+var diceDom = document.querySelector(`.dice`);
 initGame();
 function initGame(){
+
+    isNewGame = true;
     // Тоглогчийн ээлжийг хадгалах, 1r toglogvh 0 , 2r toglogch 1 gj temdeglene
     activePlayer = 0;
     
@@ -38,9 +42,11 @@ function initGame(){
     document.querySelector('.player-0-panel').classList.add('active');
     }
 
-var diceDom = document.querySelector(`.dice`);
+
 
 document.querySelector(".btn-roll").addEventListener("click", function (){
+if(isNewGame=== true){
+    
     //1-6 dotor sanamsargui too gargaj awna
     var diceNumber = Math.floor(Math.random() * 6)+1;
     // shoonii zurgiig gargaj irne
@@ -56,23 +62,27 @@ document.querySelector(".btn-roll").addEventListener("click", function (){
     else{
         switchToNextPlayer();
     }
-
+}else{
+    alert('Тоглоом дууссан байна. NEW GAME товчийг дарж шинээр эхлэнэ үү!!!');
+}
 });
 document.querySelector(".btn-hold").addEventListener("click", function(){
-    
-    
-    score[activePlayer] = score[activePlayer] + roundScore;
-    document.getElementById("score-"+ activePlayer).textContent = score[activePlayer]; 
-    if(score[activePlayer] >= 20){
-        //Ялагч гэсэн тэкст
-        document.getElementById("name-" + activePlayer).textContent = "WINNER!!!"
-        document.querySelector(`.player-` + activePlayer +`-panel`).classList.add("winner");
-        document.querySelector(`.player-` + activePlayer +`-panel`).classList.remove("active");
+    if(isNewGame){
+        score[activePlayer] = score[activePlayer] + roundScore;
+        document.getElementById("score-"+ activePlayer).textContent = score[activePlayer]; 
+        if(score[activePlayer] >= 20){
+            isNewGame = false;
+            //Ялагч гэсэн тэкст
+            document.getElementById("name-" + activePlayer).textContent = "WINNER!!!"
+            document.querySelector(`.player-` + activePlayer +`-panel`).classList.add("winner");
+            document.querySelector(`.player-` + activePlayer +`-panel`).classList.remove("active");
+        }else{
+            switchToNextPlayer();   
+        }
+        
     }else{
-        switchToNextPlayer();   
+        alert('Тоглоом дууссан байна. NEW GAME товчийг дарж шинээр эхлэнэ үү!!!');
     }
-    
-    
 });
 
 function switchToNextPlayer(){ 
