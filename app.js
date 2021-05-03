@@ -1,26 +1,45 @@
 // Тоглогчийн ээлжийг хадгалах, 1r toglogvh 0 , 2r toglogch 1 gj temdeglene
-var activePlayer = 0;
+var activePlayer;
+var score;
+var roundscore;
+initGame();
+function initGame(){
+    // Тоглогчийн ээлжийг хадгалах, 1r toglogvh 0 , 2r toglogch 1 gj temdeglene
+    activePlayer = 0;
+    
+    
+    //toglogchiin eekjiin oniig hadgalah
+    score= [0, 0];
+    
+    
+    //idewtei toglogchiin onoog hadgalah
+    roundScore= 0;
+    
+    
+    //shoo ali talaaram buusniig hadagalah function 1-6 ali  buusniig hadgalah 
+    var diceNumber = Math.floor(Math.random() * 6)+1;
+    
+    
+    window.document.getElementById("score-0").textContent=`0`;
+    window.document.getElementById("score-1").textContent=`0`;
+    window.document.getElementById("current-0").textContent=`0`;
+    window.document.getElementById("current-1").textContent=`0`;
+    diceDom.style.display = "none";
+    //toglogchdiin neriig dahij gargah
+    document.getElementById('name-0').textContent = 'Player 1';
+    document.getElementById('name-1').textContent = 'Player 2';
 
+    document.querySelector('.player-0-panel').classList.remove('winner');
+    document.querySelector('.player-1-panel').classList.remove('winner');
 
-//toglogchiin eekjiin oniig hadgalah
-var score= [0, 0];
-
-
-//idewtei toglogchiin onoog hadgalah
-var roundScore= 0;
-
-
-//shoo ali talaaram buusniig hadagalah function 1-6 ali  buusniig hadgalah 
-var diceNumber = Math.floor(Math.random() * 6)+1;
-
-
-window.document.getElementById("score-0").textContent=`0`;
-window.document.getElementById("score-1").textContent=`0`;
-window.document.getElementById("current-0").textContent=`0`;
-window.document.getElementById("current-1").textContent=`0`;
+    document.querySelector('.player-0-panel').classList.remove('active');
+    document.querySelector('.player-1-panel').classList.remove('active');
+    
+    document.querySelector('.player-0-panel').classList.add('active');
+    }
 
 var diceDom = document.querySelector(`.dice`);
-diceDom.style.display = "none";
+
 document.querySelector(".btn-roll").addEventListener("click", function (){
     //1-6 dotor sanamsargui too gargaj awna
     var diceNumber = Math.floor(Math.random() * 6)+1;
@@ -70,3 +89,5 @@ function switchToNextPlayer(){
         diceDom.style.display= "none";
     
 }
+// Шинээр эхлүүлэх товч хийх 
+document.querySelector('.btn-new').addEventListener(`click`, initGame);
