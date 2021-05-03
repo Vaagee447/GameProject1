@@ -35,31 +35,38 @@ document.querySelector(".btn-roll").addEventListener("click", function (){
         document.getElementById(`current-`+ activePlayer).textContent = roundScore;
     } 
     else{
-        //1buusan bol toglogchiin eeljiig solino 
+        switchToNextPlayer();
+    }
+
+});
+document.querySelector(".btn-hold").addEventListener("click", function(){
+    
+    
+    score[activePlayer] = score[activePlayer] + roundScore;
+    document.getElementById("score-"+ activePlayer).textContent = score[activePlayer]; 
+    if(score[activePlayer] >= 20){
+        //Ялагч гэсэн тэкст
+        document.getElementById("name-" + activePlayer).textContent = "WINNER!!!"
+        document.querySelector(`.player-` + activePlayer +`-panel`).classList.add("winner");
+        document.querySelector(`.player-` + activePlayer +`-panel`).classList.remove("active");
+    }else{
+        switchToNextPlayer();   
+    }
+    
+    
+});
+
+function switchToNextPlayer(){ 
+    //ээлжийн оноог 0 болгоно
+    //1buusan bol toglogchiin eeljiig solino 
         //herew idewhitei toglogch ni 1 baiwl idewhitei toglogchiig 0 bolgo
         roundScore= 0;
         document.getElementById(`current-`+ activePlayer).textContent = 0;  
-        // activePlayer===0 ? (activePlayer=1): (activePlayer=0);
-        if(activePlayer===0)
-        {
-            activePlayer=1;
-        }
-        else
-        {
-            activePlayer=0;
-        }
+        activePlayer===0 ? (activePlayer=1): (activePlayer=0);
         //Ulaan tseg haij oloh 
         document.querySelector(`.player-0-panel`).classList.toggle(`active`);
         document.querySelector(`.player-1-panel`).classList.toggle(`active`);
         //Шоог түр алга болгоно 
         diceDom.style.display= "none";
-        
-
-
-    }
-
-});
-
-
-
-console.log(`Шоо ` +dice);
+    
+}
