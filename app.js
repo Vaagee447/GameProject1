@@ -70,7 +70,7 @@ document.querySelector(".btn-hold").addEventListener("click", function(){
     if(isNewGame){
         score[activePlayer] = score[activePlayer] + roundScore;
         document.getElementById("score-"+ activePlayer).textContent = score[activePlayer]; 
-        if(score[activePlayer] >= 20){
+        if(score[activePlayer] >= 100){
             isNewGame = false;
             //Ялагч гэсэн тэкст
             document.getElementById("name-" + activePlayer).textContent = "WINNER!!!"
